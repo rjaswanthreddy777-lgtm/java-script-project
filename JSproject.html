@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Highway Traffic Simulation</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+h1{
+    margin:15px 0;
+}
+
+button{
+    padding:10px 25px;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
+}
+
+.road{
+    width:100%;
+    height:350px;
+
+    /* 🔥 IMAGE FROM FOLDER */
+    background-image: url("Js photo.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.vehicle{
+    position:absolute;
+    left:-120px;   /* start outside */
+    font-size:40px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚦 Highway Traffic Simulation</h1>
+
+<button onclick="start()">Start</button>
+<button onclick="stop()">Stop</button>
+
+<div class="road">
+    <div class="vehicle" style="top:220px">🚗</div>
+    <div class="vehicle" style="top:260px">🚗</div>
+    <div class="vehicle" style="top:300px">🚗</div>
+
+    <div class="vehicle" style="top:180px">🚌</div>
+    <div class="vehicle" style="top:140px">🚛</div>
+
+    <div class="vehicle" style="top:100px">🚶</div>
+    <div class="vehicle" style="top:70px">🚶</div>
+
+    <div class="vehicle" style="top:20px">🚗</div>
+    <div class="vehicle" style="top:330px">🚌</div>
+    <div class="vehicle" style="top:360px">🚛</div>
+</div>
+
+<script>
+let vehicles = document.querySelectorAll(".vehicle");
+let interval = null;
+let x = -120;
+
+function start(){
+    if(interval) return;
+
+    interval = setInterval(() => {
+        x += 4;   // forward movement
+
+        vehicles.forEach(v => {
+            v.style.left = x + "px";
+        });
+
+        if(x > window.innerWidth){
+            x = -120;
+        }
+    }, 40);
+}
+
+function stop(){
+    clearInterval(interval);
+    interval = null;
+}
+</script>
+
+</body>
+</html>
